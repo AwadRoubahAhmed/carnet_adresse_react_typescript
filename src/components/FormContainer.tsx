@@ -16,21 +16,19 @@ export default function FormContainer() {
       email,
     };
 
-    setAddAdresses([...addAdresses, addContentsAdresse]);
-    //Todo...
+    if (name.length && email.length > 0) {
+      setAddAdresses([...addAdresses, addContentsAdresse]);
+    }
+    setName("");
+    setEmail("");
   };
 
-  /*const handleClick = () => {
-    console.log("Clicked!!");
-    //Todo...
-  }; */
-
-  const handleChangeName = (e: React.FormEvent<HTMLFormElement>) => {
-    setName(e.target.value);
+  const handleChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
   };
 
-  const handleChangeEmail = (e: React.FormEvent<HTMLFormElement>) => {
-    setEmail(e.target.value);
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
   };
   return (
     <div>
@@ -46,7 +44,7 @@ export default function FormContainer() {
             className="w-full border-none mx-1 p-1 capitalize font-semibold"
           />
         </div>
-        <div className=" flex items-center">
+        <div className=" flex  items-center">
           <label htmlFor="email">Email: </label>
           <input
             type="text"
@@ -67,9 +65,12 @@ export default function FormContainer() {
       <hr />
       <div>
         {addAdresses.length > 0 && (
-          <ul>
+          <ul className="flex flex-col ">
             {addAdresses.map((adresse) => (
-              <li key={adresse.email}>
+              <li
+                key={adresse.email}
+                className="border bg-neutral-400 rounded-md my-1 p-3"
+              >
                 {adresse.name} : {adresse.email}
               </li>
             ))}
